@@ -1,0 +1,156 @@
+{
+  "profile_id": "test_courses",
+  "window_title": "test",
+  "window_class": "test",
+  "identity_texts": [
+    "课程中心"
+  ],
+  "scroll_notches": -2,
+  "scroll_at": [
+    0.5,
+    0.6
+  ],
+  "navigation": {
+    "enabled": true,
+    "max_depth": 5,
+    "max_actions": 50,
+    "max_scrolls_per_page": 3
+  },
+  "pages": [
+    {
+      "id": "menu",
+      "kind": "menu",
+      "region": [
+        0,
+        0.1,
+        1,
+        0.95
+      ],
+      "required_patterns": [
+        "全部栏目"
+      ],
+      "reject_patterns": [],
+      "fields": [
+        {
+          "name": "title",
+          "pattern": "标题:(.+)"
+        }
+      ],
+      "allow_scroll": false,
+      "capture": false,
+      "routes": [
+        {
+          "id": "category",
+          "selector": "课程分类",
+          "region": [
+            0,
+            0.1,
+            1,
+            0.9
+          ],
+          "target_page": "list",
+          "relation": "child",
+          "mode": "once",
+          "purpose": "read_only",
+          "review_evidence": "Synthetic fixture: opens category without account mutation",
+          "return_control": {
+            "type": "text",
+            "text": "返回"
+          }
+        }
+      ]
+    },
+    {
+      "id": "list",
+      "kind": "list",
+      "region": [
+        0,
+        0.1,
+        1,
+        0.95
+      ],
+      "required_patterns": [
+        "课程目录"
+      ],
+      "reject_patterns": [],
+      "fields": [
+        {
+          "name": "title",
+          "pattern": "标题:(.+)"
+        }
+      ],
+      "allow_scroll": false,
+      "capture": false,
+      "item_start": "课程 (\\d+)",
+      "min_items": 1,
+      "routes": [
+        {
+          "id": "item",
+          "selector": "课程 (\\d+)",
+          "region": [
+            0,
+            0.1,
+            1,
+            0.9
+          ],
+          "target_page": "detail",
+          "relation": "child",
+          "mode": "each",
+          "purpose": "read_only",
+          "review_evidence": "Synthetic fixture: opens detail",
+          "target_key_pattern": "课程编号:(\\d+)",
+          "target_key_region": [
+            0,
+            0.1,
+            1,
+            0.25
+          ],
+          "return_control": {
+            "type": "text",
+            "text": "返回"
+          }
+        }
+      ]
+    },
+    {
+      "id": "detail",
+      "kind": "detail",
+      "region": [
+        0,
+        0.1,
+        1,
+        0.95
+      ],
+      "required_patterns": [
+        "课程编号:\\d+"
+      ],
+      "reject_patterns": [],
+      "fields": [
+        {
+          "name": "title",
+          "pattern": "标题:(.+)"
+        }
+      ],
+      "allow_scroll": false,
+      "capture": true,
+      "routes": [
+        {
+          "id": "expand",
+          "selector": "展开介绍",
+          "region": [
+            0,
+            0.1,
+            1,
+            0.9
+          ],
+          "target_page": "detail",
+          "relation": "expand",
+          "mode": "once",
+          "purpose": "read_only",
+          "review_evidence": "Synthetic fixture: expands text only",
+          "verify_pattern": "完整介绍"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "profile_id": "auction_visible_v2",
+  "window_title": "中瀚盛典艺拍",
+  "window_class": "Chrome_WidgetWin_0",
+  "identity_texts": [
+    "办理号牌"
+  ],
+  "scroll_notches": -2,
+  "scroll_at": [
+    0.5,
+    0.6
+  ],
+  "pages": [
+    {
+      "id": "auction_list",
+      "kind": "list",
+      "region": [
+        0.045,
+        0.1,
+        0.95,
+        0.9
+      ],
+      "required_patterns": [
+        "Lot\\s*\\d{4,6}",
+        "当前价|无底价"
+      ],
+      "reject_patterns": [
+        "交保证金",
+        "立即登录",
+        "请输入.*密码"
+      ],
+      "item_start": "Lot\\s*\\d{4,6}",
+      "min_items": 1,
+      "id_field": "lot",
+      "allow_scroll": true,
+      "fields": [
+        {
+          "name": "lot",
+          "pattern": "Lot\\s*(\\d{4,6})"
+        },
+        {
+          "name": "title",
+          "pattern": "(.+[《〈].+[》〉])"
+        },
+        {
+          "name": "price",
+          "pattern": "(当前价\\s*.*|无底价)"
+        }
+      ],
+      "id_min_confidence": 0.7
+    }
+  ]
+}

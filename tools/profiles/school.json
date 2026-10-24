@@ -1,0 +1,42 @@
+{
+  "profile_id": "school_visible_v1",
+  "window_title": "完美校园",
+  "window_class": "Chrome_WidgetWin_0",
+  "identity_texts": [
+    "选择学校"
+  ],
+  "scroll_notches": -2,
+  "scroll_at": [
+    0.5,
+    0.6
+  ],
+  "pages": [
+    {
+      "id": "school_names",
+      "kind": "list",
+      "region": [
+        0.04,
+        0.14,
+        0.87,
+        0.94
+      ],
+      "required_patterns": [
+        "大学|学院|学校|科技城"
+      ],
+      "reject_patterns": [
+        "立即登录"
+      ],
+      "item_start": ".+",
+      "min_items": 3,
+      "id_field": "title",
+      "id_min_confidence": 0.75,
+      "fields": [
+        {
+          "name": "title",
+          "pattern": "^(.+)$"
+        }
+      ],
+      "allow_scroll": true
+    }
+  ]
+}
